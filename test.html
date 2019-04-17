@@ -5,10 +5,21 @@
 </head>
 <body>
 <h1>심플 메모</h1>
-메모를 입력하세요 <br>
-<input type="text" id="myText"/>
+<p>메모를 입력하세요</p>
+<p>
+<input type="text" id="myText" style="width:50%"/>
 <input type="button" id="save" value="저장"/>
-<script type="text/javascript">
+</p>
+<p>
+<table id="myResult" width="70%">
+  <tr>
+    <th width="50%">날짜</th>
+    <th width="50%">메모</th>
+  </tr>
+</table>
+</p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
 var memolist=[];
 var save = document.getElementById('save');
 save.addEventListener('click', mySave);
@@ -16,11 +27,15 @@ function mySave(){
   var x = document.getElementById("myText").value;
   var date = new Date();
   memolist.push({'date':date,'memo':x});
-  var msg = "";
-  for(var i=0;i<memolist.length;i++){
-    msg = msg + memolist[i]['date'] + " " + memolist[i]['memo'] + "\n";
-  }
-  alert(msg);
+  //var msg = "";
+  //for(var i=0;i<memolist.length;i++){
+  //  msg = msg + memolist[i]['date'] + " " + memolist[i]['memo'] + "\n";
+  //}
+  //alert(msg);
+  var myDate = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate()
+             + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
+  $('#myResult').append('<tr><td>'+myDate+'</td><td>'+x+'</td></tr>');
 }
 </script>
 </body>
